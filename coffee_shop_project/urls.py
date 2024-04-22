@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from coffee_shop.views import *
 
 urlpatterns = [
@@ -31,4 +31,6 @@ urlpatterns = [
     path('menuitems/<int:pk>/', MenuItemDetail.as_view(), name='menuitem-detail'),
 
     path('users/create/', UserCreateAPIView.as_view(), name='user-create'),
+
+    path('auth/', include('rest_framework.urls')),
 ]
