@@ -59,9 +59,3 @@ class MenuItemDetail(RetrieveUpdateDestroyAPIView):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
     permission_classes = [IsAuthenticated & IsOwnerOrReadOnly]
-
-
-class UserCreateAPIView(CreateAPIView):
-    queryset = Owner.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [AllowAny]

@@ -30,7 +30,5 @@ urlpatterns = [
     path('menuitems/', MenuItemList.as_view(), name='menuitem-list-create'),
     path('menuitems/<int:pk>/', MenuItemDetail.as_view(), name='menuitem-detail'),
 
-    path('users/create/', UserCreateAPIView.as_view(), name='user-create'),
-
     path('auth/', include('rest_framework.urls')),
 ]
