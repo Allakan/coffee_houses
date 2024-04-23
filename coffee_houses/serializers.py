@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import *
+from .models import CoffeeHouse, Menu, MenuItem, Owner
 
 
 class CoffeeHouseSerializer(serializers.ModelSerializer):

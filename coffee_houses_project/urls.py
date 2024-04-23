@@ -1,5 +1,5 @@
 """
-URL configuration for coffee_shop_project project.
+URL configuration for coffee_houses_project project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,19 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from coffee_shop.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
-    path('coffeehouses/', CoffeeHouseList.as_view(), name='coffeehouse-list-create'),
-    path('coffeehouses/<int:pk>/', CoffeeHouseDetail.as_view(), name='coffeehouse-detail'),
-
-    path('menus/', MenuList.as_view(), name='menu-list-create'),
-    path('menus/<int:pk>/', MenuDetail.as_view(), name='menu-detail'),
-
-    path('menuitems/', MenuItemList.as_view(), name='menuitem-list-create'),
-    path('menuitems/<int:pk>/', MenuItemDetail.as_view(), name='menuitem-detail'),
-
-    path('auth/', include('rest_framework.urls')),
+    path('api/admin/', admin.site.urls),
+    path('api/auth/', include('rest_framework.urls')),
+    path('api/', include('coffee_houses.urls')),
 ]

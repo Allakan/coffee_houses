@@ -1,9 +1,10 @@
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.generics import *
-from .models import *
-from .serializers import *
-from .permissions import *
-from rest_framework.permissions import *
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from .serializers import CoffeeHouse, CoffeeHouseSerializer
+from .serializers import Menu, MenuSerializer
+from .serializers import MenuItem, MenuItemSerializer
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 
 class CoffeeHouseList(ListCreateAPIView):
