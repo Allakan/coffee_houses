@@ -1,26 +1,31 @@
-admin/ админ панель 
+api/admin/ админ панель 
 
 ____________________________
 
-coffeehouses/ кофейня
+api/coffeehouses/ кофейня
 
-coffeehouses/<int:pk>/
+api/coffeehouses/<int:pk>/
 ____________________________
 
-menus/ меню
+api/menus/ меню
 
-menus/<int:pk>/
-
-____________________________
-
-menuitems/ пункты меню
-
-menuitems/<int:pk>/
+api/menus/<int:pk>/
 
 ____________________________
 
-auth/ авторизация
+api/menuitems/ пункты меню
+
+api/menuitems/<int:pk>/
+
 ____________________________
+
+api/auth/ авторизация
+____________________________
+
+api/schema/swagger-ui/ документация по эндпоинтам
+
+___________________________
+
 Создание суперпользователя(админа) через терминал:
 
 	python manage.py createsuperuser
