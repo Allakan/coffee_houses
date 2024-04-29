@@ -1,17 +1,5 @@
 from rest_framework import serializers
-from .models import CoffeeHouse, Menu, MenuItem, Owner
-
-
-class CoffeeHouseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CoffeeHouse
-        fields = '__all__'
-
-
-class MenuSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Menu
-        fields = '__all__'
+from .models import CoffeeHouse, Menu, MenuItem
 
 
 class MenuItemSerializer(serializers.ModelSerializer):
@@ -20,15 +8,31 @@ class MenuItemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
+class MenuSerializer(serializers.ModelSerializer):
+    items = MenuItemSerializer(many=True, required=False)
+
     class Meta:
-        model = Owner
-        fields = ['id', 'username', 'full_name', 'phone_number', 'email', 'password']
-        extra_kwargs = {
-            'password': {'write_only': True},  # Пароль будет скрыт при выводе
-        }
+        model = Menu
+        fields = '__all__'
 
     def create(self, validated_data):
-        user = Owner.objects.create_user(**validated_data)
-        return user
+        items_data = validated_data.pop('items', [])
+        items_info = Menu.objects.create(**validated_data)
+        for item_data in items_data:
+            Menu.objects.create(menu_items_info=items_info, **item_data)
+        return items_info
 
+
+class CoffeeHouseSerializer(serializers.ModelSerializer):
+    menus = MenuSerializer(many=True, required=False)
+
+    class Meta:
+        model = CoffeeHouse
+        fields = '__all__'
+
+    def create(self, validated_data):
+        menus_data = validated_data.pop('menus', [])
+        menus_info = CoffeeHouse.objects.create(**validated_data)
+        for menu_data in menus_data:
+            CoffeeHouse.objects.create(menus_info=menus_info, **menu_data)
+        return menus_info

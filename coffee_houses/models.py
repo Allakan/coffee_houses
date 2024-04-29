@@ -1,34 +1,6 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
-
-
-class Owner(AbstractUser):
-    full_name = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=20)
-    email = models.EmailField(unique=True)
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['full_name', 'email', 'phone_number']
-
-    groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='owner_set',  # Изменяем related_name для groups
-        blank=True,
-        verbose_name='groups',
-        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
-    )
-
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='owner_set',
-        blank=True,
-        verbose_name='user permissions',
-        help_text='Specific permissions for this user.',
-    )
-
-    def __str__(self):
-        return self.full_name
 
 
 class CoffeeHouse(models.Model):
